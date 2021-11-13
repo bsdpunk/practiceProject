@@ -33,7 +33,8 @@ RUN apt-get update && apt-get install -y \
     git \
     nfs-common \
     net-tools \
-    iputils-ping
+    iputils-ping \
+    tree
 
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 RUN pip3 install --upgrade pip
@@ -42,8 +43,9 @@ RUN pip3 install \
    mariadb \
    flask \
    marshmallow \
-   PyMySQL
-
+   PyMySQL \
+   alembic \
+   sqlacodegen
 ADD vimrc /root/.vimrc
 RUN vim -c 'PluginInstall' -c 'qa!'
 #RUN vim -c 'GoInstallBinaries' -c 'qa!'
