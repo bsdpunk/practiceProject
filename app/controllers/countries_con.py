@@ -32,14 +32,14 @@ class Country_con:
 
     def ins(self, data):
         d = json.loads(json.dumps(data))
-#        schema = government.CountriesSchema.load("",d)
-        #d = schema().load(json.loads(json.dumps(data)))
+#        d['ids'] = 0
+        schema = government.CountriesSchema
+        d = schema.load(d)
         stmt = (
         insert(government.Countries).values(d)
 )
         print(stmt)
         result = con.execute(stmt)
-        print("here here")
         print(result)
         return "Success"
     def updash(self, ids, data):
