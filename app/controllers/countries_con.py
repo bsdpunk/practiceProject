@@ -1,4 +1,4 @@
-from sqlalchemy.sql import select, insert, delete
+from sqlalchemy.sql import select, insert, delete, update
 from sqlalchemy import create_engine
 import sys
 sys.path.insert(1, '/app/models')
@@ -32,26 +32,23 @@ class Country_con:
 
     def ins(self, data):
         d = json.loads(json.dumps(data))
-#        ses = con.session()
-#        ses.add(Countries.government(rank = "234"))
-#        con.commit()
-#        d["ids"] = 234
 #        schema = government.CountriesSchema.load("",d)
         #d = schema().load(json.loads(json.dumps(data)))
-#        print(schema)
-#        print(data["Rank"])
-#        print(d.type)
-#        print(d.rank)
         stmt = (
         insert(government.Countries).values(d)
-            #[data["Rank"], data["Country"], data["Revenues"], data["Expenditures"], data["SurplusDeficit"], data["SurplusGDP"], data["Year"]])
 )
         print(stmt)
         result = con.execute(stmt)
         print("here here")
         print(result)
         return "Success"
-    
+    def updash(self, ids, data):
+        d = json.loads(json.dumps(data))
+        stmt = (
+        update(government.Countries).values(d).where(government.Countries.ids == ids)
+        )
+        result = con.execute(stmt)
+        return "Success"
     def remove(self, ids):
         print(ids)
         stmt = (

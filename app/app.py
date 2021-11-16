@@ -11,6 +11,14 @@ app = Flask(__name__)
 def welcome():
     return "Hello World!"
 
+@app.route('/update/', methods=['POST'])
+@app.route('/update/<ids>', methods=['POST'])
+def upd(ids=None):
+    data = request.get_json()
+    country = countries_con.Country_con()
+    results = country.updash(ids, data)
+    return jsonify(results)
+
 @app.route('/add/', methods=['POST'])
 def add():
     data = request.get_json()
