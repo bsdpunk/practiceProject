@@ -20,6 +20,7 @@ album = dict(artist=bowie, title="Hunky Dory", release_date=date(1971, 12, 17))
 schema = AlbumSchema()
 result = schema.dump(album)
 pprint(result, indent=2)
+print(type(result))
 # { 'artist': {'name': 'David Bowie'},
 #   'release_date': '1971-12-17',
 #   'title': 'Hunky Dory'}

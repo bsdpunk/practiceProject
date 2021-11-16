@@ -1,5 +1,6 @@
 import readline
-
+import add
+import delete
 COMMANDS=sorted(['add-budget-item', 'del-budget-items', 'version', 'quit'])
 def complete(text, state):
      for cmd in COMMANDS:

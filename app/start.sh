@@ -22,9 +22,11 @@ mysql --user='root' --password='Qapla1999' -h 192.168.1.94 --execute "CREATE USE
 mysql --user='root' --password='Qapla1999' -h 192.168.1.94 --execute "GRANT ALL PRIVILEGES ON government.* TO 'dusty'@'%';"
 mysql --user='root' --password='Qapla1999' -h 192.168.1.94 --execute "FLUSH PRIVILEGES;"
 mysql --user='root' --password='Qapla1999' -h 192.168.1.94 --execute "CREATE DATABASE government;"
-python table.py
-#alembic init alembic
-#sed -i 's/driver:\/\/user:pass@localhost\/dbname/mysql+pymysql:\/\/root:Qapla1999@192\.168\.1\.94\/government/' alembic.ini
-#BASELINE=$( alembic revision -m "baseline" | grep -o "[A-z0-9]\+_baseline" | sed 's/_baseline//' )
-#echo $BASELINE
-#cat ctable.txt > alembic/versions/${BASELINE}_baseline.py
+#python table.py
+alembic init alembic
+sed -i 's/driver:\/\/user:pass@localhost\/dbname/mysql+pymysql:\/\/root:Qapla1999@192\.168\.1\.94\/government/' alembic.ini
+BASELINE=$( alembic revision -m "baseline" | grep -o "[A-z0-9]\+_baseline" | sed 's/_baseline//' )
+echo $BASELINE
+sed -i '17,24d' alembic/versions/${BASELINE}_baseline.py
+cat ctable.txt >> alembic/versions/${BASELINE}_baseline.py
+alembic upgrade head

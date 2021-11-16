@@ -34,8 +34,10 @@ RUN apt-get update && apt-get install -y \
     nfs-common \
     net-tools \
     iputils-ping \
-    tree
-
+    tree \
+    mariadb-client-10.5 \
+    python3-distutils \
+    python3-dev
 RUN git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 RUN pip3 install --upgrade pip
 RUN pip3 install \
@@ -45,7 +47,10 @@ RUN pip3 install \
    marshmallow \
    PyMySQL \
    alembic \
-   sqlacodegen
+   sqlacodegen \
+   flask-marshmallow \
+   Marshmallow-SQLAlchemy \
+   Flask-SQLAlchemy
 ADD vimrc /root/.vimrc
 RUN vim -c 'PluginInstall' -c 'qa!'
 #RUN vim -c 'GoInstallBinaries' -c 'qa!'

@@ -1,0 +1,15 @@
+
+def upgrade():
+    op.create_table('countries',
+    sa.Column('id', sa.Integer, primary_key = True),
+    sa.Column('Rank', sa.String(3)),
+    sa.Column('Country', sa.String(33)),
+    sa.Column('Revenues', sa.String(8)),
+    sa.Column('Expenditures', sa.String(8)),
+    sa.Column('SurplusDeficit', sa.String(10)),
+    sa.Column('SurplusGDP', sa.String(7)),
+    sa.Column('Year', sa.String(21)),        
+    )
+    
+def downgrade():
+        op.drop_table('countries')
