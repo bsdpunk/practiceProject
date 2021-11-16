@@ -1,4 +1,4 @@
-from sqlalchemy.sql import select, insert
+from sqlalchemy.sql import select, insert, delete
 from sqlalchemy import create_engine
 import sys
 sys.path.insert(1, '/app/models')
@@ -51,4 +51,11 @@ class Country_con:
         print("here here")
         print(result)
         return "Success"
-
+    
+    def remove(self, ids):
+        print(ids)
+        stmt = (
+        delete(government.Countries).where(government.Countries.ids == ids)
+        )
+        result = con.execute(stmt)
+        return "Success"

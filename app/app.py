@@ -19,16 +19,17 @@ def add():
     return jsonify(results)
 
 @app.route('/del/', methods=['GET', 'POST'])
-def rmv():
-    return "del"
+@app.route('/del/<ids>')
+def rmv(ids=None): 
+    i = countries_con.Country_con()
+    results = i.remove(ids)
+    return jsonify(results)
 
 @app.route('/show/', methods=['GET'])
 @app.route('/show/<ids>')
 def show(ids=None):
     i = countries_con.Country_con()
     results = i.select(ids)
-    print("hey dummy")
-    schema = government.CountriesSchema()
     return jsonify(results)
 
 
