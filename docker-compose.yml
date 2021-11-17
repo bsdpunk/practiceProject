@@ -1,0 +1,40 @@
+version: '3.9'
+
+networks:
+    lan-net:
+
+volumes: 
+    db-vol:
+
+services:
+
+    api:
+        build: .
+        container_name: api
+        hostname: api
+        environment:
+            FLASK_ENV: development
+        ports:
+            - 105:105
+        networks:
+            lan-net:
+        volumes:
+            - ./app:/code
+
+    db:
+        image: mariadb
+        container_name: mdb 
+        hostname: db
+        restart: always
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            MYSQL_ROOT_PASSWORD: Qapla1999
+            MYSQL_USER: dusty
+            MYSQL_DATABASE: government
+            MYSQL_PASSWORD: Qapla1984
+        volumes:
+            - db-vol:/var/lib/mysql
+        ports:
+            - 3306:3306
+        networks:
+            lan-net:

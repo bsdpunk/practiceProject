@@ -31,7 +31,7 @@ set rtp+=$HOME/.vim/bundle/Vundle.vim
 " Plugin 'gmarik/Vundle.vim'
 "Plugin 'davidhalter/jedi-vim'
 Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'klen/python-mode'
+"Plugin 'klen/python-mode'
 Plugin 'othree/javascript-libraries-syntax.vim'
 "Plugin 'moll/vim-node'
 Plugin 'maksimr/vim-jsbeautify'

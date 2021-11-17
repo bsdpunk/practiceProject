@@ -26,7 +26,7 @@ class Countries(Base):
 class CountriesSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = Countries
-        fields = ("id", "Rank", "Country", "Revenues", "Expenditures", "SurplusDeficit", "SurplusGDP", "Year")
+        fields = ( "Rank", "Country", "Revenues", "Expenditures", "SurplusDeficit", "SurplusGDP", "Year")
         include_fk = True
         load_instance = True
     ids = ma.auto_field()
