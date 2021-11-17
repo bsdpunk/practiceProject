@@ -6,11 +6,13 @@ sys.path.insert(1, '/app/models')
 import government
 import pymysql
 import json
-print(government)
 
 def asdict(i):
-    return {'rank': i.Rank, 'country': i.Country, 'revenues': i.Revenues,
-            'expenditures': i.Expenditures,  'Year': i.Year}
+    return {'rank': i.Rank,
+            'country': i.Country, 
+            'revenues': i.Revenues,
+            'expenditures': i.Expenditures,  
+            'Year': i.Year}
 
 
 con = create_engine('mysql+pymysql://root:Qapla1999@192.168.1.94/government', echo=True)
@@ -36,13 +38,14 @@ class Country_con:
     def ins(self, data):
         d = json.loads(json.dumps(data))
         print(d["Rank"])
+        schema = government.CountriesSchema()
         g = government.Countries(rank = d["Rank"], country=d["Country"] ,
                 year=d["Year"], revenues = d["Revenues"],
                 expenditures=d["Expenditures"], surplusGDP = d["SurplusGDP"], 
                 surplusDeficit = d["SurplusDeficit"])
         session.add(g)
         session.commit()
-
+        print(schema.dump(schema))
 
 
         
@@ -65,10 +68,29 @@ class Country_con:
     
     def updash(self, ids, data):
         d = json.loads(json.dumps(data))
+        schema = government.CountriesSchema()
+#        g = government.Countries(ids= ids, 
+#                rank = d["Rank"], 
+#                country=d["Country"] ,
+#                year=d["Year"], 
+#                revenues = d["Revenues"],
+#                expenditures=d["Expenditures"], 
+#                surplusGDP = d["SurplusGDP"], 
+#                surplusDeficit = d["SurplusDeficit"]
+#                )
+#        session.query(User).filter(User.name == "squidward").\
+#        update({"name": "spongebob"}, synchronize_session="fetch")
+#        session.update(g)
+#        session.commit()
+
+
+
+
         stmt = (
         update(government.Countries).values(d).where(government.Countries.ids == ids)
         )
         result = con.execute(stmt)
+        #print(schema.dump(schema))
         return "Success"
     
     def remove(self, ids):

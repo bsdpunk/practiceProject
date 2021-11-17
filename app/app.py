@@ -5,6 +5,7 @@ sys.path.append('models')
 import government
 import countries_con
 from flask_sqlalchemy import SQLAlchemy
+import logging
 
 app = Flask(__name__)
 @app.route('/hello/', methods=['GET', 'POST'])
@@ -36,9 +37,14 @@ def rmv(ids=None):
 @app.route('/show/', methods=['GET'])
 @app.route('/show/<ids>')
 def show(ids=None):
-    i = countries_con.Country_con()
-    results = i.select(ids)
-    return jsonify(results)
+    logging.info('>>>> ' + request.method + ' /show/' + (ids or ''))
+    countries_controller = countries_con.Country_con()
+    results = countries_controller.select(ids)
+    return jsonify({
+        'success': True,
+        'total': len(results),
+        'records': results
+        })
 
 
 

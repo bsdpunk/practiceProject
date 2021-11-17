@@ -2,39 +2,51 @@ version: '3.9'
 
 networks:
     lan-net:
+        driver: bridge
 
 volumes: 
     db-vol:
 
 services:
 
-    api:
-        build: .
-        container_name: api
-        hostname: api
-        environment:
-            FLASK_ENV: development
-        ports:
-            - 105:105
-        networks:
-            lan-net:
-        volumes:
-            - ./app:/code
-
     db:
-        image: mariadb
-        container_name: mdb 
-        hostname: db
-        restart: always
-        command: --default-authentication-plugin=mysql_native_password
+        container_name: db
+        image: mysql
+        platform: linux/x86_64
         environment:
-            MYSQL_ROOT_PASSWORD: Qapla1999
+            MYSQL_ROOT_HOST: '%'
             MYSQL_USER: dusty
-            MYSQL_DATABASE: government
             MYSQL_PASSWORD: Qapla1984
+            MYSQL_DATABASE: government
+            MYSQL_ROOT_PASSWORD: Qapla1999
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
         volumes:
             - db-vol:/var/lib/mysql
+            - ./db:/docker-entrypoint-initdb.d
+        hostname: db
         ports:
-            - 3306:3306
+            - 3307:3306
         networks:
-            lan-net:
+            - lan-net
+
+    api:
+        container_name: built
+        # image: app-api:0.0.0
+        build:
+            context: ./apiContainer
+            dockerfile: ./Dockerfile
+        environment:
+            FLASK_HOST: localhost
+            FLASK_ENV: development
+        command: ['flask', 'run']
+        restart: always
+        hostname: api
+        ports:
+            - 5001:5000
+        networks:
+            - lan-net
+        volumes:
+            - ./app:/app
+        depends_on:
+            - db

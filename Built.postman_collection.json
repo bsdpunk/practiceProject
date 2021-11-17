@@ -1,0 +1,84 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Built",
+		"_postman_id": "c4902cc1-7d46-894a-ae46-8f7b01aa8869",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Government table Show",
+			"request": {
+				"url": "127.0.0.1:105/show",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Show Individual",
+			"request": {
+				"url": "127.0.0.1:105/show/4",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Insert",
+			"request": {
+				"url": "127.0.0.1:105/add",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Rank\": \"234\",\"Country\":\"nowhere\",\"Revenues\": \"1\",\"Expenditures\":\"1\",\"Year\":\"2017\", \"SurplusDeficit\":\"3\",\"SurplusGDP\":\"1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"url": "127.0.0.1:105/update/7",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"Rank\": \"234\",\"Country\":\"nowhere\",\"Revenues\": \"1\",\"Expenditures\":\"1\",\"Year\":\"2017\", \"SurplusDeficit\":\"3\",\"SurplusGDP\":\"1\"}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"url": "127.0.0.1:105/del/9",
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
